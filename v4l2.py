@@ -117,7 +117,7 @@ class timeval(ctypes.Structure):
 
 
 VIDEO_MAX_FRAME = 32
-
+VIDEO_MAX_PLANES = 8
 
 VID_TYPE_CAPTURE = 1
 VID_TYPE_TUNER = 2
@@ -619,6 +619,20 @@ V4L2_JPEG_MARKER_APP = 1 << 7
 # Memory-mapping buffers
 #
 
+# https://www.kernel.org/doc/html/v5.10/userspace-api/media/v4l/buffer.html#struct-v4l2-plane
+class v4l2_plane(ctypes.Structure):
+    class _u(ctypes.Union):
+        _fields_ = [("mem_offset", ctypes.c_uint32),
+                    ("userptr", ctypes.c_ulong),
+                    ("fd", ctypes.c_int32)]
+    _fields_ = [
+                ('bytesused', ctypes.c_uint32),
+                ('length', ctypes.c_uint32),
+                ('m', _u),
+                ('data_offset',  ctypes.c_uint32),
+                ('reserved', ctypes.c_uint32 * 11)
+            ]
+
 class v4l2_requestbuffers(ctypes.Structure):
     _fields_ = [
         ('count', ctypes.c_uint32),
@@ -633,6 +647,8 @@ class v4l2_buffer(ctypes.Structure):
         _fields_ = [
             ('offset', ctypes.c_uint32),
             ('userptr', ctypes.c_ulong),
+            ('planes', ctypes.POINTER(v4l2_plane)),
+            ('fd', ctypes.c_int32)
         ]
 
     _fields_ = [
@@ -1807,19 +1823,64 @@ class v4l2_mpeg_vbi_fmt_ivtv(ctypes.Structure):
 # Aggregate structures
 #
 
+class v4l2_plane_pix_format(ctypes.Structure):
+    _fields_ = [
+        ('sizeimage', ctypes.c_uint32),
+        ('bytesperline', ctypes.c_uint32),
+        ('reserved', ctypes.c_uint16 * 6)
+    ]
+
+class v4l2_sdr_format(ctypes.Structure):
+    _fields_ = [
+        ('pixelformat', ctypes.c_uint32),
+        ('buffersize', ctypes.c_uint32),
+        ('reserved', ctypes.c_uint8 * 24)
+    ]
+
+class v4l2_meta_format(ctypes.Structure):
+    _fields_ = [
+        ('dataformat', ctypes.c_uint32),
+        ('buffersize', ctypes.c_uint32)
+    ]
+
+class v4l2_pix_format_mplane(ctypes.Structure):
+    class _u(ctypes.Union):
+        _fields_ = [
+            ('ycbcr_enc', ctypes.c_uint8),
+            ('hsv_enc', ctypes.c_uint8)
+        ]
+
+    _fields_ = [
+        ('width', ctypes.c_uint32),
+        ('height', ctypes.c_uint32),
+        ('pixelformat', ctypes.c_uint32),
+        ('field', ctypes.c_uint32),
+        ('colorspace', ctypes.c_uint32),
+        ('plane_fmt', v4l2_plane_pix_format * VIDEO_MAX_PLANES),
+        ('num_planes', ctypes.c_uint8),
+        ('flags', ctypes.c_uint8),
+        ('_u', _u),
+        ('quantization', ctypes.c_uint8),
+        ('xfer_func', ctypes.c_uint8),
+        ('reserved', ctypes.c_uint8 * 7)
+    ]
+
 class v4l2_format(ctypes.Structure):
     class _u(ctypes.Union):
         _fields_ = [
             ('pix', v4l2_pix_format),
+            ('pix_mp', v4l2_pix_format_mplane),
             ('win', v4l2_window),
             ('vbi', v4l2_vbi_format),
             ('sliced', v4l2_sliced_vbi_format),
-            ('raw_data', ctypes.c_char * 200),
+            ('sdr', v4l2_sdr_format),
+            ('meta', v4l2_meta_format),
+            ('raw_data', ctypes.c_char * 200)
         ]
 
     _fields_ = [
         ('type', v4l2_buf_type),
-        ('fmt', _u),
+        ('fmt', _u)
     ]
 
 
