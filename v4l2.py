@@ -438,6 +438,7 @@ V4L2_PIX_FMT_MJPEG = v4l2_fourcc('M', 'J', 'P', 'G')
 V4L2_PIX_FMT_JPEG = v4l2_fourcc('J', 'P', 'E', 'G')
 V4L2_PIX_FMT_DV = v4l2_fourcc('d', 'v', 's', 'd')
 V4L2_PIX_FMT_MPEG = v4l2_fourcc('M', 'P', 'E', 'G')
+V4L2_PIX_FMT_H264 = v4l2_fourcc('H', '2', '6', '4')
 
 # Vendor-specific formats
 V4L2_PIX_FMT_CPIA1 = v4l2_fourcc('C', 'P', 'I', 'A')
