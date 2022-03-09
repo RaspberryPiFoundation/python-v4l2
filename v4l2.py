@@ -388,6 +388,7 @@ V4L2_PIX_FMT_BGR32 = v4l2_fourcc('B', 'G', 'R', '4')
 V4L2_PIX_FMT_RGB32 = v4l2_fourcc('R', 'G', 'B', '4')
 V4L2_PIX_FMT_RGBX32 = v4l2_fourcc('X', 'B', '2', '4')
 V4L2_PIX_FMT_XRGB32 = v4l2_fourcc('B', 'X', '2', '4')
+V4L2_PIX_FMT_RGBA32 = v4l2_fourcc('A', 'B', '2', '4')
 
 # Grey formats
 V4L2_PIX_FMT_GREY = v4l2_fourcc('G', 'R', 'E', 'Y')
