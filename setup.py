@@ -9,7 +9,7 @@ setup(
 
     maintainer='Raspberry Pi Foundation',
     maintainer_email='web@raspberrypi.org',
-    url='http://pypi.python.org/pypi/v4l2',
+    url='https://pypi.org/project/v4l2-python3/',
     keywords='v4l2 video4linux video4linux2 binding ctypes',
     description='Python bindings for the v4l2 userspace api.',
 
