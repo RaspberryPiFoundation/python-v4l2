@@ -6,6 +6,7 @@ Jinlei Zheng
 
 2017/06/10
 
+See the [Wiki](https://github.com/RaspberryPiFoundation/python-v4l2/wiki) for PyPI publishing instructions.
 
 Following is the original READMD.md content
 ===========================================
