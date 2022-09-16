@@ -3,7 +3,7 @@
 Provides Python bindings for Video4Linux2.
 
 Based on the work of [Jinlei Zheng](https://github.com/AlexJinlei/python-v4l2),
-which was based in turn on [v4l2](https://pypi.org/project/v4l2/).
+which was based in turn on [python-v4l2](https://pypi.org/project/v4l2/).
 
 Additions have been made for the H264 format and for Python3.
 
