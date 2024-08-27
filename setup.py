@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='v4l2-python3',
-    version='0.3.4',
+    version='0.3.5',
     license='GPLv2',
     requires=('ctypes',),
     py_modules=('v4l2',),
