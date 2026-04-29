@@ -1,5 +1,13 @@
 # python-v4l2
 
+**THIS REPOSITORY HAS BEEN ARCHIVED AND IS NOW READ-ONLY**
+
+This project is no longer actively maintained. No new issues or pull requests will be accepted here.
+
+The project was archived on 2026-04-29 after no updates for several years.
+ 
+---
+
 Provides Python bindings for Video4Linux2.
 
 Based on the work of [Jinlei Zheng](https://github.com/AlexJinlei/python-v4l2),
